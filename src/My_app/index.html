@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Half-Asleep Hero | 5 Star Challenge</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Background Effects -->
+        <div id="chocolate-rain"></div>
+        <div class="dream-overlay"></div>
+
+        <!-- Main Game Container -->
+        <main class="game-container">
+
+            <!-- Intro Screen -->
+            <div id="start-screen" class="screen active">
+                <h1 class="title">Half-Asleep Hero</h1>
+                <p class="subtitle">The 5-Star Zone-Out Challenge</p>
+                <div class="instructions">
+                    <p>👁️ Keep your eyes <strong>half-open</strong>.</p>
+                    <p>😴 Stay in the "perfect lazy zone" for 30s.</p>
+                    <p>⚠️ Too alert? <strong>LOSE.</strong></p>
+                    <p>💤 Eyes closed? <strong>LOSE.</strong></p>
+                </div>
+                <button id="start-btn" class="btn-primary" disabled>Loading AI Model...</button>
+
+                <!-- Footer Branding -->
+                <div class="branding-footer">
+                    <p>✨ Made by <span class="gang-name">5star Gang</span> ✨</p>
+                </div>
+            </div>
+
+            <!-- Gameplay Screen -->
+            <div id="game-screen" class="screen">
+                <div class="hud">
+                    <div class="timer-container">
+                        <span id="timer">30</span>s
+                    </div>
+                    <div class="status-indicator" id="status-text">Zoning Out...</div>
+                </div>
+
+                <!-- Visual feedback for eye state -->
+                <div class="eye-meter">
+                    <div class="zone-marker simple-zone">Too Sleepy</div>
+                    <div class="zone-marker target-zone">The Zone</div>
+                    <div class="zone-marker alert-zone">Too Awake</div>
+                    <div id="eye-level-indicator" class="indicator"></div>
+                </div>
+
+                <div class="video-container">
+                    <video id="webcam" autoplay playsinline muted></video>
+                    <!-- Canvas for debug drawing (hidden in production look) -->
+                    <canvas id="output_canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen" class="screen">
+
+                <!-- 5 Star Branding Card -->
+                <div class="card-container">
+                    <div class="star-card" id="result-card">
+                        <div class="card-content">
+                            <div class="brand-header">
+                                <span class="brand-text">5 Star</span>
+                            </div>
+                            <!-- Dynamic Result Content -->
+                            <div class="result-body">
+                                <h2 id="result-title">Zone Lost!</h2>
+                                <p id="result-message">You opened your eyes too wide.</p>
+
+                                <div id="badge-container" class="hidden">
+                                    <div class="hero-badge">
+                                        <div class="star">★</div>
+                                        <div class="hero-text">Certified<br>Half-Asleep<br>Hero</div>
+                                        <div class="star">★</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <p>Do Nothing Mode</p>
+                            </div>
+                        </div>
+                        <!-- Shine Effect -->
+                        <div class="card-shine"></div>
+                    </div>
+                </div>
+
+                <button id="restart-btn" class="btn-primary">Try Again</button>
+            </div>
+
+        </main>
+
+    </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

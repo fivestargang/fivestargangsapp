@@ -1,0 +1,609 @@
+:root {
+    --color-bg: #1a0b2e;
+    /* Deep purple dark */
+    --color-primary: #ffd700;
+    /* Gold */
+    --color-secondary: #6b2c91;
+    /* Cadbury-ish Purple */
+    --color-text: #ffffff;
+    --color-danger: #ff4d4d;
+    --color-success: #4dff88;
+
+    --font-main: 'Outfit', sans-serif;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    /* Premium Dark Chocolate & Warm Caramel Gradient */
+    background: radial-gradient(circle at center, #5d4037 0%, #2b1b17 100%);
+    color: var(--color-text);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chocolate-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    /* Behind main content but visible */
+}
+
+.dream-overlay {
+    /* Adjust dream overlay to blend better with new bg */
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+}
+
+/* Falling Chocolate Styling */
+.choco-item {
+    position: absolute;
+    top: -100px;
+    background-image: url('/5star.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+    /* Cinematic shadow */
+    opacity: 0;
+    /* Start hidden, fade in */
+    animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Animation Keyframes */
+@keyframes fallSmooth {
+    0% {
+        transform: translateY(-100px) rotate(var(--rot-start));
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(var(--rot-end));
+        opacity: 0;
+    }
+}
+
+/* Parallax Layers */
+/* Foreground: Sharp, larger, faster */
+.choco-layer-1 {
+    width: 140px;
+    height: 60px;
+    z-index: 2;
+    filter: blur(0px) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
+}
+
+/* Midground: Normal */
+.choco-layer-2 {
+    width: 100px;
+    height: 45px;
+    z-index: 1;
+    filter: blur(1px) drop-shadow(0 10px 10px rgba(0, 0, 0, 0.4));
+    opacity: 0.9;
+}
+
+/* Background: Blurred, smaller, slower */
+.choco-layer-3 {
+    width: 70px;
+    height: 30px;
+    z-index: 0;
+    filter: blur(3px) drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
+    opacity: 0.6;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* Container */
+.game-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    /* Higher than background elements */
+    padding: 20px;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography */
+h1.title {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff, var(--color-primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+.instructions {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.instructions p {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #555;
+    color: #888;
+    box-shadow: none;
+}
+
+/* Gameplay UI */
+.hud {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.timer-container {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.status-indicator {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 5px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* === Branding Footer === */
+.branding-footer {
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 2s ease-out;
+    opacity: 0.8;
+}
+
+.branding-footer p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Eye Meter */
+.eye-meter {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.zone-marker {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    /* Hide text visually but keep structure if needed */
+}
+
+/* Zones: Bottom 20% sleepy, Middle 20-50% zone, Top 50% awake */
+.simple-zone {
+    bottom: 0;
+    height: 20%;
+    background: rgba(255, 0, 0, 0.2);
+    /* Red for closed */
+}
+
+.target-zone {
+    bottom: 20%;
+    height: 30%;
+    /* 20% to 50% */
+    background: rgba(255, 215, 0, 0.3);
+    /* Gold */
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.alert-zone {
+    bottom: 50%;
+    height: 50%;
+    background: rgba(255, 0, 0, 0.2);
+    /* Red for awake */
+}
+
+.indicator {
+    position: absolute;
+    bottom: 0%;
+    /* Dynamic */
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: white;
+    box-shadow: 0 0 5px white;
+    transition: bottom 0.1s linear;
+}
+
+/* Video & Canvas */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    /* Constrain width */
+    aspect-ratio: 4/3;
+    /* Standard webcam aspect ratio */
+    margin: 80px auto 20px;
+    /* Add top margin to clear the absolute HUD */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(107, 44, 145, 0.4);
+    background: #000;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#webcam {
+    position: relative;
+    /* Changed from absolute */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    /* Mirror effect */
+    opacity: 0.8;
+    /* Slight fade for dreamy look */
+    border-radius: 20px;
+}
+
+#output_canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    /* Mirror matches video */
+    pointer-events: none;
+    z-index: 6;
+}
+
+/* === 5 Star Card Design === */
+.card-container {
+    perspective: 1000px;
+    margin-bottom: 30px;
+    width: 300px;
+    height: 450px;
+}
+
+.star-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #4a1c68 0%, #330066 100%);
+    border-radius: 24px;
+    border: 4px solid #ffd700;
+    /* Gold Border */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Winner Variant */
+.star-card.winner {
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+    border-color: #fff;
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.6), 0 0 50px rgba(255, 255, 255, 0.5);
+}
+
+.star-card.winner .brand-header {
+    background: #fff;
+    color: #d4af37;
+}
+
+.star-card.winner .result-body {
+    color: #330066;
+    /* Dark text for contrast on gold */
+}
+
+.star-card.winner #result-title {
+    text-shadow: none;
+    font-size: 3rem;
+    letter-spacing: 2px;
+}
+
+.star-card.winner .hero-badge {
+    border-color: #330066;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.star-card.winner .hero-text,
+.star-card.winner .star {
+    color: #330066;
+}
+
+.star-card.winner .card-footer {
+    border-top-color: rgba(51, 0, 102, 0.2);
+    color: rgba(51, 0, 102, 0.7);
+}
+
+.star-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(45deg, transparent 48%, rgba(255, 215, 0, 0.1) 50%, transparent 52%);
+    background-size: 20px 20px, 100% 100%;
+    background-position: 0 0;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    color: #fff;
+}
+
+.brand-header {
+    transform: skewX(-10deg);
+    background: #ffd700;
+    color: #330066;
+    padding: 5px 15px;
+    align-self: flex-start;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+.brand-text {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.result-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#result-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#result-message {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* Hero Badge specific inside card */
+.hero-badge {
+    margin-top: 20px;
+    border: 2px dashed #ffd700;
+    padding: 15px;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.1);
+    animation: pulseGold 2s infinite;
+}
+
+.hero-text {
+    font-weight: 800;
+    color: #ffd700;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+.card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Shine Effect */
+.card-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(125deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(255, 255, 255, 0.4) 47%,
+            rgba(255, 255, 255, 0) 50%);
+    z-index: 5;
+    pointer-events: none;
+    background-size: 250% 250%;
+    animation: shineCard 6s infinite ease-in-out;
+}
+
+@keyframes shineCard {
+    0% {
+        background-position: 100% 100%;
+    }
+
+    20% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes pulseGold {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+
+/* Results */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1.title {
+        font-size: 2rem;
+    }
+
+    .instructions {
+        font-size: 0.9rem;
+    }
+}
