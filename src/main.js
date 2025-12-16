@@ -1,6 +1,7 @@
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import confetti from 'canvas-confetti';
 import './style.css';
+import './countdown.css';
 
 const video = document.getElementById("webcam");
 const canvasElement = document.getElementById("output_canvas");
@@ -11,6 +12,8 @@ const timerDisplay = document.getElementById("timer");
 const statusText = document.getElementById("status-text");
 const eyeIndicator = document.getElementById("eye-level-indicator");
 const dreamOverlay = document.querySelector(".dream-overlay");
+const countdownOverlay = document.getElementById("countdown-overlay");
+const countdownText = document.getElementById("countdown-text");
 
 // Screens
 const startScreen = document.getElementById("start-screen");
@@ -155,26 +158,59 @@ function startGame() {
         startScreen.classList.remove("active");
         gameScreen.classList.add("active");
 
-        // Reset Game State
-        gameActive = true;
-        gameStartTime = Date.now();
-        timeRemaining = 30;
-        faultTime = 0;
-
-        // Start Timer
-        const timerInterval = setInterval(() => {
-            if (!gameActive) {
-                clearInterval(timerInterval);
-                return;
-            }
-            timeRemaining--;
-            timerDisplay.innerText = timeRemaining;
-
-            if (timeRemaining <= 0) {
-                endGame(true);
-            }
-        }, 1000);
+        // Start Countdown Sequence instead of immediate game
+        startCountdown();
     });
+}
+
+function startCountdown() {
+    gameActive = false; // Ensure game is not active yet
+    countdownOverlay.classList.remove("hidden");
+    let count = 3;
+    countdownText.innerText = count;
+
+    const interval = setInterval(() => {
+        count--;
+        if (count > 0) {
+            countdownText.innerText = count;
+            // Retrigger animation
+            countdownText.style.animation = 'none';
+            countdownText.offsetHeight; /* trigger reflow */
+            countdownText.style.animation = null;
+        } else if (count === 0) {
+            countdownText.innerText = "Do Nothing!";
+        } else {
+            clearInterval(interval);
+            countdownOverlay.classList.add("hidden");
+            initializeGameLogic();
+        }
+    }, 1000);
+}
+
+function initializeGameLogic() {
+    // Reset Game State
+    gameActive = true;
+    gameStartTime = Date.now();
+    timeRemaining = 30;
+    faultTime = 0;
+    timerDisplay.innerText = timeRemaining;
+
+    // Start Timer
+    const timerInterval = setInterval(() => {
+        if (!gameActive) {
+            clearInterval(timerInterval);
+            return;
+        }
+        timeRemaining--;
+        timerDisplay.innerText = timeRemaining;
+
+        if (timeRemaining <= 0) {
+            endGame(true);
+        }
+    }, 1000);
+
+    // KICKSTART THE AI LOOP
+    predictWebcam();
 }
 
 function endGame(won, reason = "") {
