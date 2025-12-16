@@ -22,8 +22,13 @@
 
 body {
     font-family: var(--font-main);
-    /* Premium Dark Chocolate & Warm Caramel Gradient */
-    background: radial-gradient(circle at center, #5d4037 0%, #2b1b17 100%);
+    background-color: var(--color-bg);
+    /* Use the new template image */
+    background-image: url('/background-frame.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keep background static while scrolling */
     color: var(--color-text);
     height: 100vh;
     overflow: hidden;
@@ -260,11 +265,7 @@ h1.title {
 
 /* === Branding Footer === */
 .branding-footer {
-    margin-top: 30px;
-    text-align: center;
-    width: 100%;
-    animation: fadeIn 2s ease-out;
-    opacity: 0.8;
+    display: none; /* Hide footer as it is part of the background image now */
 }
 
 .branding-footer p {
