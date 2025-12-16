@@ -47,20 +47,26 @@ const EAR_HALF = 0.35; // Upper bound of half-open
 // This might need tuning per user, but fixed thresholds are okay for a prototype.
 
 async function createFaceLandmarker() {
-    const filesetResolver = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.8/wasm"
-    );
-    faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
-        baseOptions: {
-            modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
-            delegate: "GPU"
-        },
-        outputFaceBlendshapes: true,
-        runningMode: runningMode,
-        numFaces: 1
-    });
-    startBtn.textContent = "Start Zone-Out";
-    startBtn.disabled = false;
+    try {
+        const filesetResolver = await FilesetResolver.forVisionTasks(
+            "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.8/wasm"
+        );
+        faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+            baseOptions: {
+                modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+                delegate: "GPU"
+            },
+            outputFaceBlendshapes: true,
+            runningMode: runningMode,
+            numFaces: 1
+        });
+        startBtn.textContent = "Start Zone-Out";
+        startBtn.disabled = false;
+    } catch (error) {
+        console.error(error);
+        startBtn.textContent = "Error Loading AI: " + error.message;
+        // Fallback or retry logic could go here
+    }
 }
 
 createFaceLandmarker();
