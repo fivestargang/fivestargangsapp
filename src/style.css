@@ -28,7 +28,8 @@ body {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Keep background static while scrolling */
+    background-attachment: fixed;
+    /* Keep background static while scrolling */
     color: var(--color-text);
     height: 100vh;
     overflow: hidden;
@@ -265,7 +266,8 @@ h1.title {
 
 /* === Branding Footer === */
 .branding-footer {
-    display: none; /* Hide footer as it is part of the background image now */
+    display: none;
+    /* Hide footer as it is part of the background image now */
 }
 
 .branding-footer p {
@@ -599,12 +601,116 @@ h1.title {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+
+    /* Background Adjustment */
+    body {
+        /* On portrait mobile, 'cover' might chop off the frame too much. 
+           We adjust position or size if needed, but 'cover' is usually best to fill screen.
+           We ensure content has padding. */
+        background-position: center top;
+        padding: 10px;
+    }
+
+    /* Container */
+    .game-container {
+        padding: 10px;
+        justify-content: flex-start;
+        /* improved for smaller screens */
+        padding-top: 80px;
+        /* Space for top frame */
+    }
+
+    /* Typography Scaling */
     h1.title {
+        font-size: 1.8rem;
+        margin-top: 20px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Instructions */
+    .instructions {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .instructions p {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Video Container */
+    .video-container {
+        margin-top: 60px;
+        /* Less margin on mobile */
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    /* HUD adjustments */
+    .hud {
+        top: 10px;
+    }
+
+    .timer-container {
+        font-size: 2.5rem;
+    }
+
+    .status-indicator {
+        font-size: 1rem;
+        padding: 4px 12px;
+    }
+
+    /* Eye Meter */
+    .eye-meter {
+        width: 15px;
+        right: 10px;
+        height: 200px;
+    }
+
+    /* Result Card */
+    .card-container {
+        width: 90%;
+        max-width: 300px;
+        height: 400px;
+    }
+
+    .star-card .brand-header {
+        margin-bottom: 10px;
+    }
+
+    #result-title {
         font-size: 2rem;
     }
 
+    .hero-badge {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media (max-height: 700px) {
+
+    /* High-density layout for short screens */
+    .game-container {
+        padding-top: 20px;
+        justify-content: center;
+    }
+
+    h1.title {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        display: none;
+        /* Hide subtitle on very short screens */
+    }
+
     .instructions {
-        font-size: 0.9rem;
+        padding: 0.8rem;
     }
 }
