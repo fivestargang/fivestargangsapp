@@ -24,7 +24,7 @@ body {
     font-family: var(--font-main);
     background-color: var(--color-bg);
     /* Use the new template image */
-    background-image: url('/background-frame.png');
+    background-image: url('./assets/background-frame.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -60,7 +60,7 @@ body {
 .choco-item {
     position: absolute;
     top: -100px;
-    background-image: url('/5star.png');
+    background-image: url('./assets/5star.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
