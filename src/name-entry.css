@@ -8,8 +8,24 @@
 }
 
 .name-card-container {
+    width: 480px;
+    height: 340px;
+}
+
+/* Enforce size and override generic mobile styles */
+.name-card-container.name-card-container {
     width: 280px;
-    height: 240px;
+    height: 300px;
+    margin-bottom: 0;
+    /* Remove generic card margin */
+}
+
+@media (max-width: 768px) {
+    .name-card-container.name-card-container {
+        width: 280px;
+        height: 300px;
+        /* Ensure it doesn't get stretched by generic mobile styles */
+    }
 }
 
 .name-card-content {

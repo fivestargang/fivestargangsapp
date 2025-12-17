@@ -2,12 +2,14 @@ import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import confetti from 'canvas-confetti';
 import './style.css';
 import './countdown.css';
+import './name-entry.css';
 
 const video = document.getElementById("webcam");
 const canvasElement = document.getElementById("output_canvas");
 const canvasCtx = canvasElement.getContext("2d");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
+const exitBtn = document.getElementById("exit-btn");
 const timerDisplay = document.getElementById("timer");
 const statusText = document.getElementById("status-text");
 const eyeIndicator = document.getElementById("eye-level-indicator");
@@ -398,6 +400,24 @@ startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", () => {
     resultScreen.classList.remove("active");
     startScreen.classList.add("active");
+
+    // Reset visual states
+    card.classList.remove("winner");
+    card.style.transform = "rotateX(0deg) rotateY(0deg)";
+});
+
+exitBtn.addEventListener("click", () => {
+    resultScreen.classList.remove("active");
+    startScreen.classList.add("active");
+
+    // Reset to Name Entry
+    gameStartPhase.classList.add("hidden");
+    nameEntryPhase.classList.remove("hidden");
+    nameEntryPhase.style.display = 'flex'; // Restore display flex
+
+    // Clear input
+    nameInput.value = "";
+    playerName = "Hero";
 
     // Reset visual states
     card.classList.remove("winner");
