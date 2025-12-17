@@ -8,8 +8,8 @@
 }
 
 .name-card-container {
-    width: 320px;
-    height: 180px;
+    width: 280px;
+    height: 240px;
 }
 
 .name-card-content {
@@ -18,14 +18,14 @@
     align-items: center;
     justify-content: center;
     /* Center vertically */
-    padding: 30px;
+    padding: 10px;
 }
 
 .name-prompt {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #fff;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     line-height: 1.2;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -38,9 +38,9 @@
     /* Less padding, bigger font */
     border-radius: 12px;
     /* Chocolate bar shape */
-    font-size: 2.5rem;
+    font-size: 2rem;
     /* BIGGER FONT */
-    height: 990px;
+    height: 80px;
     /* Fix height */
     font-family: var(--font-main);
     font-weight: 900;
