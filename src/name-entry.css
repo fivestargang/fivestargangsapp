@@ -1,0 +1,64 @@
+/* Input Phase */
+.input-phase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    color: #ffd700;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-family: var(--font-main);
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Welcome Text */
+.welcome-text {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.fade-in-section {
+    animation: fadeIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Result Name */
+.result-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+/* Winner variant for name */
+.star-card.winner .result-name {
+    color: #330066;
+}

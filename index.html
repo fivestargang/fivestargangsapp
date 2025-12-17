@@ -25,13 +25,24 @@
             <div id="start-screen" class="screen active">
                 <h1 class="title">Half-Asleep Hero</h1>
                 <p class="subtitle">The 5-Star Zone-Out Challenge</p>
-                <div class="instructions">
-                    <p>👁️ Keep your eyes <strong>half-open</strong>.</p>
-                    <p>😴 Stay in the "perfect lazy zone" for 30s.</p>
-                    <p>⚠️ Too alert? <strong>LOSE.</strong></p>
-                    <p>💤 Eyes closed? <strong>LOSE.</strong></p>
+                <!-- Phase 1: Name Entry -->
+                <div id="name-entry-phase" class="input-phase">
+                    <input type="text" id="player-name-input" class="glass-input" placeholder="Enter your Name"
+                        maxlength="15" autocomplete="off" />
+                    <button id="submit-name-btn" class="btn-primary">Continue</button>
                 </div>
-                <button id="start-btn" class="btn-primary" disabled>Loading AI Model...</button>
+
+                <!-- Phase 2: Game Ready (Hidden initially) -->
+                <div id="game-start-phase" class="hidden fade-in-section">
+                    <h3 id="welcome-msg" class="welcome-text">Welcome!</h3>
+                    <div class="instructions">
+                        <p>👁️ Keep your eyes <strong>half-open</strong>.</p>
+                        <p>😴 Stay in the "perfect lazy zone" for 30s.</p>
+                        <p>⚠️ Too alert? <strong>LOSE.</strong></p>
+                        <p>💤 Eyes closed? <strong>LOSE.</strong></p>
+                    </div>
+                    <button id="start-btn" class="btn-primary" disabled>Loading AI Model...</button>
+                </div>
 
                 <!-- Footer Branding -->
                 <div class="branding-footer">
@@ -79,6 +90,7 @@
                             <!-- Dynamic Result Content -->
                             <div class="result-body">
                                 <h2 id="result-title">Zone Lost!</h2>
+                                <p id="result-player-name" class="result-name"></p>
                                 <p id="result-message">You opened your eyes too wide.</p>
 
                                 <div id="badge-container" class="hidden">

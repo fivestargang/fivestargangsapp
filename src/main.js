@@ -15,6 +15,14 @@ const dreamOverlay = document.querySelector(".dream-overlay");
 const countdownOverlay = document.getElementById("countdown-overlay");
 const countdownText = document.getElementById("countdown-text");
 
+// Name Entry Elements
+const nameEntryPhase = document.getElementById("name-entry-phase");
+const gameStartPhase = document.getElementById("game-start-phase");
+const nameInput = document.getElementById("player-name-input");
+const submitNameBtn = document.getElementById("submit-name-btn");
+const welcomeMsg = document.getElementById("welcome-msg");
+const resultPlayerName = document.getElementById("result-player-name");
+
 // Screens
 const startScreen = document.getElementById("start-screen");
 const gameScreen = document.getElementById("game-screen");
@@ -32,6 +40,7 @@ let gameStartTime = 0;
 let timeRemaining = 30;
 let faultTime = 0; // ms spent outside zone
 const FAULT_TOLERANCE = 2000; // 2 seconds leeway
+let playerName = "Hero"; // Default name
 
 // Constants for Eye Aspect Ratio (EAR)
 // Using specific indices for MediaPipe Face Mesh
@@ -227,6 +236,10 @@ function endGame(won, reason = "") {
     if (won) {
         card.classList.add("winner");
         resultTitle.innerText = "⭐ YOU DID IT! ⭐";
+
+        // Update Name
+        resultPlayerName.innerText = `${playerName}`;
+
         // Text colors handled by CSS .winner class now
         resultTitle.style.color = "";
 
@@ -263,6 +276,10 @@ function endGame(won, reason = "") {
     } else {
         card.classList.remove("winner");
         resultTitle.innerText = "Oh no!";
+
+        // Update Name
+        resultPlayerName.innerText = `${playerName}`;
+
         resultTitle.style.color = "#ff4d4d";
         resultMessage.innerText = reason;
         badgeContainer.classList.add("hidden");
@@ -352,6 +369,25 @@ if (card && cardContainer) {
         card.style.transform = "rotateX(0deg) rotateY(0deg)";
     });
 }
+
+// Name Submit Logic
+function submitName() {
+    const startName = nameInput.value.trim();
+    if (startName) {
+        playerName = startName;
+    }
+    // Switch Phases
+    nameEntryPhase.classList.add("hidden"); // Use a helper class or style
+    nameEntryPhase.style.display = 'none'; // Force hide to be sure
+    gameStartPhase.classList.remove("hidden");
+
+    welcomeMsg.innerText = `Welcome, ${playerName}!`;
+}
+
+submitNameBtn.addEventListener("click", submitName);
+nameInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") submitName();
+});
 
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", () => {
