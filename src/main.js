@@ -373,12 +373,17 @@ if (card && cardContainer) {
 // Name Submit Logic
 function submitName() {
     const startName = nameInput.value.trim();
-    if (startName) {
-        playerName = startName;
+    if (!startName) {
+        alert("Please enter a valid name to continue!");
+        nameInput.focus();
+        return;
     }
+
+    playerName = startName;
+
     // Switch Phases
-    nameEntryPhase.classList.add("hidden"); // Use a helper class or style
-    nameEntryPhase.style.display = 'none'; // Force hide to be sure
+    nameEntryPhase.classList.add("hidden");
+    nameEntryPhase.style.display = 'none';
     gameStartPhase.classList.remove("hidden");
 
     welcomeMsg.innerText = `Welcome, ${playerName}!`;

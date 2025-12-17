@@ -27,9 +27,20 @@
                 <p class="subtitle">The 5-Star Zone-Out Challenge</p>
                 <!-- Phase 1: Name Entry -->
                 <div id="name-entry-phase" class="input-phase">
-                    <input type="text" id="player-name-input" class="glass-input" placeholder="Enter your Name"
-                        maxlength="15" autocomplete="off" />
-                    <button id="submit-name-btn" class="btn-primary">Continue</button>
+                    <div class="card-container name-card-container">
+                        <div class="star-card">
+                            <div class="card-content name-card-content">
+                                <div class="brand-header">
+                                    <span class="brand-text">5 Star</span>
+                                </div>
+                                <h2 class="name-prompt">Who is the<br>Laziest?</h2>
+                                <input type="text" id="player-name-input" class="glass-input" placeholder="YOUR NAME"
+                                    maxlength="15" autocomplete="off" />
+                                <button id="submit-name-btn" class="btn-primary" style="margin-top: 20px;">I Am</button>
+                                <div class="card-shine"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Phase 2: Game Ready (Hidden initially) -->

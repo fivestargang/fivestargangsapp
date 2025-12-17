@@ -3,24 +3,51 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
     width: 100%;
     margin-bottom: 2rem;
+}
+
+.name-card-container {
+    width: 320px;
+    height: 180px;
+}
+
+.name-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Center vertically */
+    padding: 30px;
+}
+
+.name-prompt {
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .glass-input {
     background: linear-gradient(145deg, #4a2c2a, #2b1b17);
     border: 3px solid #ffd700;
     color: #ffd700;
-    padding: 15px 25px;
+    padding: 10px;
+    /* Less padding, bigger font */
     border-radius: 12px;
     /* Chocolate bar shape */
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    /* BIGGER FONT */
+    height: 990px;
+    /* Fix height */
     font-family: var(--font-main);
-    font-weight: 700;
+    font-weight: 900;
     text-align: center;
-    width: 80%;
-    max-width: 350px;
+    width: 100%;
+    /* Fill container */
+    max-width: 100%;
     outline: none;
     box-shadow:
         0 4px 6px rgba(0, 0, 0, 0.3),
